@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ==========================================
+   PREMIUM LIGHT THEME FOR ADMIN PANEL
+   ========================================== */
+.admin-light {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Override background colors */
+.admin-light .bg-zinc-950 {
+  background-color: #f8fafc !important;
+}
+.admin-light .bg-zinc-900 {
+  background-color: #ffffff !important;
+}
+.admin-light .bg-zinc-900\/50 {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+.admin-light .bg-zinc-900\/40 {
+  background-color: #ffffff !important;
+}
+.admin-light .bg-zinc-900\/20 {
+  background-color: rgba(241, 245, 249, 0.6) !important;
+}
+.admin-light .bg-zinc-900\/35 {
+  background-color: #f1f5f9 !important;
+}
+.admin-light .bg-zinc-900\/10 {
+  background-color: rgba(241, 245, 249, 0.4) !important;
+}
+.admin-light .bg-zinc-900\/80 {
+  background-color: #ffffff !important;
+}
+.admin-light .bg-zinc-950\/70 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+}
+.admin-light .bg-zinc-950\/40 {
+  background-color: #f8fafc !important;
+}
+.admin-light .bg-zinc-950\/20 {
+  background-color: #f8fafc !important;
+}
+.admin-light .bg-zinc-850 {
+  background-color: #f1f5f9 !important;
+}
+
+/* Hover effects */
+.admin-light .hover\:bg-zinc-800\/50:hover {
+  background-color: #f1f5f9 !important;
+}
+.admin-light .hover\:bg-zinc-800:hover {
+  background-color: #e2e8f0 !important;
+}
+.admin-light .hover\:bg-zinc-900\/30:hover {
+  background-color: #f1f5f9 !important;
+}
+.admin-light .hover\:bg-zinc-900:hover {
+  background-color: #e2e8f0 !important;
+}
+.admin-light .group:hover .group-hover\:bg-zinc-800\/50 {
+  background-color: #f1f5f9 !important;
+}
+
+/* Override borders */
+.admin-light .border-zinc-800,
+.admin-light .border-zinc-800\/80,
+.admin-light .border-zinc-850,
+.admin-light .border-zinc-850\/40,
+.admin-light .border-zinc-700\/50,
+.admin-light .divide-zinc-800\/80 > * + *,
+.admin-light .divide-zinc-850 > * + * {
+  border-color: #e2e8f0 !important; /* slate-200 border is cleaner */
+}
+
+/* Override text colors */
+.admin-light .text-zinc-100 {
+  color: #0f172a !important; /* slate-900 */
+}
+.admin-light .text-zinc-200 {
+  color: #1e293b !important; /* slate-800 */
+}
+.admin-light .text-zinc-300 {
+  color: #334155 !important; /* slate-700 */
+}
+.admin-light .text-zinc-400 {
+  color: #475569 !important; /* slate-600 */
+}
+.admin-light .text-zinc-500 {
+  color: #64748b !important; /* slate-500 */
+}
+.admin-light .text-white {
+  color: #0f172a !important;
+}
+.admin-light h1,
+.admin-light h2,
+.admin-light h3,
+.admin-light h4,
+.admin-light h5,
+.admin-light h6 {
+  color: #0f172a !important;
+}
+
+/* Form input elements */
+.admin-light input,
+.admin-light select,
+.admin-light textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+.admin-light input::placeholder,
+.admin-light select::placeholder,
+.admin-light textarea::placeholder {
+  color: #94a3b8 !important;
+}
+.admin-light input:focus,
+.admin-light select:focus,
+.admin-light textarea:focus {
+  border-color: #4f46e5 !important;
+}
+
+/* Active navigation links must stay white text */
+.admin-light a.bg-indigo-600 {
+  background-color: #4f46e5 !important; /* Indigo 600 */
+  color: #ffffff !important;
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3) !important;
+}
+.admin-light a.bg-indigo-600 * {
+  color: #ffffff !important;
+}
+
+/* Buttons with backgrounds should keep their white/light text */
+.admin-light .bg-indigo-600,
+.admin-light button.bg-indigo-600,
+.admin-light .bg-rose-600,
+.admin-light button.bg-rose-600,
+.admin-light .bg-emerald-600,
+.admin-light button.bg-emerald-600 {
+  color: #ffffff !important;
+}
+
+.admin-light .bg-indigo-600 *,
+.admin-light button.bg-indigo-600 *,
+.admin-light .bg-rose-600 *,
+.admin-light button.bg-rose-600 *,
+.admin-light .bg-emerald-600 *,
+.admin-light button.bg-emerald-600 * {
+  color: #ffffff !important;
+}
+
+/* Keep badges looking clean but colorful */
+.admin-light .bg-indigo-500\/10 {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+  color: #4f46e5 !important;
+}
+.admin-light .bg-emerald-500\/10 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  color: #059669 !important;
+}
+.admin-light .bg-rose-500\/10 {
+  background-color: rgba(244, 63, 94, 0.15) !important;
+  color: #dc2626 !important;
+}
+.admin-light .bg-amber-500\/10 {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  color: #d97706 !important;
+}
+.admin-light .bg-cyan-500\/10 {
+  background-color: rgba(6, 182, 212, 0.15) !important;
+  color: #0891b2 !important;
+}
+.admin-light .bg-pink-500\/10 {
+  background-color: rgba(236, 72, 153, 0.15) !important;
+  color: #db2777 !important;
+}
+
+.admin-light .bg-indigo-500\/10 * { color: #4f46e5 !important; }
+.admin-light .bg-emerald-500\/10 * { color: #059669 !important; }
+.admin-light .bg-rose-500\/10 * { color: #dc2626 !important; }
+.admin-light .bg-amber-500\/10 * { color: #d97706 !important; }
+.admin-light .bg-cyan-500\/10 * { color: #0891b2 !important; }
+.admin-light .bg-pink-500\/10 * { color: #db2777 !important; }
+
+/* In SVG line charts */
+.admin-light svg line {
+  stroke: #cbd5e1 !important;
+}
+.admin-light svg text {
+  fill: #475569 !important;
+}
+.admin-light svg circle {
+  stroke: #ffffff !important;
+}
+
