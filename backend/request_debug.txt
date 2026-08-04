@@ -1,0 +1,39 @@
+{
+    "id": "793c207c-7f5e-4e0a-addf-74df8203e96e",
+    "name": "\u00c1o d\u1ea1 2 h\u00e0ng c\u00fac, c\u1ed5 ve m\u00e8o",
+    "slug": "ao-da-2-hang-cuc-co-ve-meo",
+    "categoryId": "cat-ao-khoac",
+    "brand": "JM",
+    "description": "ashhshshs",
+    "status": "active",
+    "images": [
+        "https:\/\/pos.nvncdn.com\/790194-223281\/ps\/Ao-da-2-hang-cuc-co-ve-meo.jpg?v=1767179645",
+        "https:\/\/pos.nvncdn.com\/790194-223281\/ps\/Ao-da-2-hang-cuc-co-ve-meo-Xam-S.jpg?v=1767179751"
+    ],
+    "specifications": {
+        "Ch\u1ea5t li\u1ec7u": "Linen organic pha t\u01a1 t\u1eb1m",
+        "Xu\u1ea5t x\u1ee9": "Vi\u1ec7t Nam - Thi\u1ebft k\u1ebf \u0111\u1ed9c quy\u1ec1n b\u1edfi JM"
+    },
+    "variants": [
+        {
+            "sku": "5C07.2512",
+            "attributes": {
+                "color": "\u0110en",
+                "size": "S"
+            },
+            "price": 2285000,
+            "promoPrice": 2200000,
+            "stock": 10
+        },
+        {
+            "sku": "AO-DA-XAO-DA-XANH-MANH-M",
+            "attributes": {
+                "color": "XanhXanh",
+                "size": "MM"
+            },
+            "price": 22850228500000,
+            "promoPrice": 20000020000000,
+            "stock": 55
+        }
+    ]
+}
