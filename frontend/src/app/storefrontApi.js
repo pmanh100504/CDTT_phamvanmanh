@@ -38,7 +38,7 @@ export async function fetchStorefront(endpoint, options = {}) {
     
     return data;
   } catch (error) {
-    console.error(`Storefront API Error (${endpoint}):`, error);
+    console.warn(`Storefront API Error (${endpoint}):`, error);
     throw error;
   }
 }

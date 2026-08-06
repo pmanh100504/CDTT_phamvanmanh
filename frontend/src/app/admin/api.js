@@ -24,7 +24,7 @@ export async function fetchApi(endpoint, options = {}) {
     
     return data;
   } catch (error) {
-    console.error(`Fetch API Error (${endpoint}):`, error);
+    console.warn(`Fetch API Error (${endpoint}):`, error);
     throw error;
   }
 }

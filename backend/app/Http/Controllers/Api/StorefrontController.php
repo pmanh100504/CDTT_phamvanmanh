@@ -173,6 +173,14 @@ class StorefrontController extends Controller
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|max:20|unique:users,phone',
             'password' => 'required|string|min:6'
+        ], [
+            'email.unique' => 'Email này đã được sử dụng.',
+            'phone.unique' => 'Số điện thoại này đã được sử dụng.',
+            'email.required' => 'Vui lòng nhập email.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'fullName.required' => 'Vui lòng nhập họ tên.',
+            'password.required' => 'Vui lòng nhập mật khẩu.',
+            'password.min' => 'Mật khẩu phải từ 6 ký tự trở lên.'
         ]);
 
         $userId = (string) Str::uuid();
@@ -290,6 +298,11 @@ class StorefrontController extends Controller
             'avatar' => 'nullable|string',
             'addressBook' => 'nullable|array',
             'password' => 'nullable|string|min:6'
+        ], [
+            'phone.unique' => 'Số điện thoại này đã được đăng ký bởi tài khoản khác.',
+            'phone.required' => 'Vui lòng nhập số điện thoại.',
+            'fullName.required' => 'Vui lòng nhập họ tên.',
+            'password.min' => 'Mật khẩu phải từ 6 ký tự trở lên.'
         ]);
 
         $user->fullName = $data['fullName'];

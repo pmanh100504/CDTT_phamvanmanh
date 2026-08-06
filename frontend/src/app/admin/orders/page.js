@@ -21,6 +21,31 @@ import {
   X
 } from 'lucide-react';
 
+function parseCustomDate(dateStr) {
+  if (!dateStr) return new Date();
+  
+  let date = new Date(dateStr);
+  if (!isNaN(date.getTime())) {
+    return date;
+  }
+  
+  const dmyRegex = /^(\d{2})[-/](\d{2})[-/](\d{4})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/;
+  const match = dateStr.match(dmyRegex);
+  if (match) {
+    const [_, day, month, year, hour = '00', minute = '00', second = '00'] = match;
+    return new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
+  }
+  
+  const ymdRegex = /^(\d{4})-(\d{2})-(\d{2})(?:\s+(\d{2}):(\d{2})(?::(\d{2}))?)?$/;
+  const matchYmd = dateStr.match(ymdRegex);
+  if (matchYmd) {
+    const [_, year, month, day, hour = '00', minute = '00', second = '00'] = matchYmd;
+    return new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}`);
+  }
+  
+  return new Date();
+}
+
 export default function OrdersPage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -181,7 +206,7 @@ export default function OrdersPage() {
                       <div className="text-[10px] text-zinc-500 mt-0.5">{o.user?.phone || 'N/A'}</div>
                     </td>
                     <td className="px-4 py-4 text-zinc-400">
-                      {new Date(o.createdAt).toLocaleDateString('vi-VN')} {new Date(o.createdAt).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
+                      {parseCustomDate(o.createdAt).toLocaleDateString('vi-VN')} {parseCustomDate(o.createdAt).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
                     </td>
                     <td className="px-4 py-4 font-bold text-indigo-400">{formatVND(o.total)}</td>
                     <td className="px-4 py-4 text-center">{getStatusBadge(o.status)}</td>
@@ -380,8 +405,8 @@ export default function OrdersPage() {
                         <div className="h-1.5 w-1.5 rounded-full bg-indigo-500"></div>
                       </div>
                       <div className="flex justify-between text-[10px] text-zinc-500 font-medium">
-                        <span>Trạng thái: {evt.status.toUpperCase()}</span>
-                        <span>{new Date(evt.time).toLocaleDateString('vi-VN')} {new Date(evt.time).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</span>
+                        <span>Trạng thái: {(evt.status || '').toUpperCase()}</span>
+                        <span>{parseCustomDate(evt.time).toLocaleDateString('vi-VN')} {parseCustomDate(evt.time).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</span>
                       </div>
                       <p className="text-zinc-300 font-semibold mt-1">{evt.note}</p>
                     </div>
@@ -428,7 +453,7 @@ export default function OrdersPage() {
             </div>
             <div>
               <h3 className="font-bold underline uppercase text-[10px] mb-1">Chi tiết hóa đơn</h3>
-              <p>Ngày đặt mua: {new Date(printTemplate.order.createdAt).toLocaleDateString('vi-VN')}</p>
+              <p>Ngày đặt mua: {parseCustomDate(printTemplate.order.createdAt).toLocaleDateString('vi-VN')}</p>
               <p>Phương thức thanh toán: {printTemplate.order.paymentMethod}</p>
               <p>Đơn vị vận chuyển: {printTemplate.order.shippingMethod}</p>
             </div>
