@@ -1,70 +1,77 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AdminController;
-use App\Http\Controllers\Api\StorefrontController;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\CouponController;
+use App\Http\Controllers\Api\CartController;
 
-Route::post('/admin/login', [AdminController::class, 'login']);
+Route::post('/admin/login', [AuthController::class, 'adminLogin']);
 
 Route::prefix('admin')->group(function () {
     // Dashboard Stats
-    Route::get('/dashboard/stats', [AdminController::class, 'getDashboardStats']);
+    Route::get('/dashboard/stats', [DashboardController::class, 'getDashboardStats']);
 
     // Categories
-    Route::get('/categories', [AdminController::class, 'getCategories']);
-    Route::post('/categories', [AdminController::class, 'saveCategory']);
-    Route::delete('/categories/{id}', [AdminController::class, 'deleteCategory']);
+    Route::get('/categories', [CategoryController::class, 'getCategories']);
+    Route::post('/categories', [CategoryController::class, 'saveCategory']);
+    Route::delete('/categories/{id}', [CategoryController::class, 'deleteCategory']);
 
     // Products & Variants
-    Route::get('/products', [AdminController::class, 'getProducts']);
-    Route::post('/products', [AdminController::class, 'saveProduct']);
-    Route::delete('/products/{id}', [AdminController::class, 'deleteProduct']);
+    Route::get('/products', [ProductController::class, 'getAdminProducts']);
+    Route::post('/products', [ProductController::class, 'saveProduct']);
+    Route::delete('/products/{id}', [ProductController::class, 'deleteProduct']);
 
     // Orders
-    Route::get('/orders', [AdminController::class, 'getOrders']);
-    Route::get('/orders/{id}', [AdminController::class, 'getOrderDetails']);
-    Route::post('/orders/{id}/status', [AdminController::class, 'updateOrderStatus']);
+    Route::get('/orders', [OrderController::class, 'getAdminOrders']);
+    Route::get('/orders/{id}', [OrderController::class, 'getAdminOrderDetails']);
+    Route::post('/orders/{id}/status', [OrderController::class, 'updateOrderStatus']);
 
     // Banners
-    Route::get('/banners', [AdminController::class, 'getBanners']);
-    Route::post('/banners', [AdminController::class, 'saveBanner']);
-    Route::delete('/banners/{id}', [AdminController::class, 'deleteBanner']);
-    Route::post('/banners/{id}/track', [AdminController::class, 'trackBanner']);
+    Route::get('/banners', [BannerController::class, 'getAdminBanners']);
+    Route::post('/banners', [BannerController::class, 'saveBanner']);
+    Route::delete('/banners/{id}', [BannerController::class, 'deleteBanner']);
+    Route::post('/banners/{id}/track', [BannerController::class, 'trackBanner']);
 
     // Customers & Roles (RBAC)
-    Route::get('/customers', [AdminController::class, 'getCustomers']);
-    Route::post('/customers/{id}/status', [AdminController::class, 'updateCustomerStatus']);
-    Route::post('/customers/{id}/role', [AdminController::class, 'updateCustomerRole']);
+    Route::get('/customers', [CustomerController::class, 'getCustomers']);
+    Route::post('/customers/{id}/status', [CustomerController::class, 'updateCustomerStatus']);
+    Route::post('/customers/{id}/role', [CustomerController::class, 'updateCustomerRole']);
 
     // Coupons
-    Route::get('/coupons', [AdminController::class, 'getCoupons']);
-    Route::post('/coupons', [AdminController::class, 'saveCoupon']);
-    Route::delete('/coupons/{code}', [AdminController::class, 'deleteCoupon']);
+    Route::get('/coupons', [CouponController::class, 'getCoupons']);
+    Route::post('/coupons', [CouponController::class, 'saveCoupon']);
+    Route::delete('/coupons/{code}', [CouponController::class, 'deleteCoupon']);
 });
 
 // STOREFRONT ROUTING (Public & Protected via simulated client X-User-Id header validation)
 Route::prefix('storefront')->group(function () {
-    Route::get('/banners', [StorefrontController::class, 'getBanners']);
-    Route::post('/banners/{id}/track', [StorefrontController::class, 'trackBannerClick']);
-    Route::get('/categories', [StorefrontController::class, 'getCategories']);
-    Route::get('/products', [StorefrontController::class, 'getProducts']);
-    Route::get('/products/{id}', [StorefrontController::class, 'getProductDetails']);
-    Route::post('/products/{id}/reviews', [StorefrontController::class, 'submitReview']);
+    Route::get('/banners', [BannerController::class, 'getStorefrontBanners']);
+    Route::post('/banners/{id}/track', [BannerController::class, 'trackBannerClick']);
+    Route::get('/categories', [CategoryController::class, 'getCategories']);
+    Route::get('/products', [ProductController::class, 'getStorefrontProducts']);
+    Route::get('/products/{id}', [ProductController::class, 'getProductDetails']);
+    Route::post('/products/{id}/reviews', [ProductController::class, 'submitReview']);
     
-    Route::post('/auth/register', [StorefrontController::class, 'register']);
-    Route::post('/auth/login', [StorefrontController::class, 'login']);
-    Route::get('/auth/profile', [StorefrontController::class, 'getProfile']);
-    Route::post('/auth/profile', [StorefrontController::class, 'updateProfile']);
+    Route::post('/auth/register', [AuthController::class, 'register']);
+    Route::post('/auth/login', [AuthController::class, 'login']);
+    Route::get('/auth/profile', [CustomerController::class, 'getProfile']);
+    Route::post('/auth/profile', [CustomerController::class, 'updateProfile']);
     
-    Route::get('/cart', [StorefrontController::class, 'getCart']);
-    Route::post('/cart', [StorefrontController::class, 'addToCart']);
-    Route::post('/cart/update', [StorefrontController::class, 'updateCartItem']);
-    Route::delete('/cart', [StorefrontController::class, 'removeCartItem']);
+    Route::get('/cart', [CartController::class, 'getCart']);
+    Route::post('/cart', [CartController::class, 'addToCart']);
+    Route::post('/cart/update', [CartController::class, 'updateCartItem']);
+    Route::delete('/cart', [CartController::class, 'removeCartItem']);
     
-    Route::post('/coupons/verify', [StorefrontController::class, 'verifyCoupon']);
+    Route::post('/coupons/verify', [CouponController::class, 'verifyCoupon']);
     
-    Route::get('/orders', [StorefrontController::class, 'getOrders']);
-    Route::post('/orders', [StorefrontController::class, 'placeOrder']);
-    Route::get('/orders/{id}', [StorefrontController::class, 'getOrderDetails']);
-    Route::post('/orders/{id}/cancel', [StorefrontController::class, 'cancelOrder']);
+    Route::get('/orders', [OrderController::class, 'getStorefrontOrders']);
+    Route::post('/orders', [OrderController::class, 'placeOrder']);
+    Route::get('/orders/{id}', [OrderController::class, 'getStorefrontOrderDetails']);
+    Route::post('/orders/{id}/cancel', [OrderController::class, 'cancelOrder']);
 });
